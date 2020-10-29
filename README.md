@@ -9,3 +9,7 @@
 
 # eventer
 
+```bash
+go get k8s.io/kubernetes || true
+
+```
