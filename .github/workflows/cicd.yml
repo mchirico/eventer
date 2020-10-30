@@ -35,7 +35,7 @@ jobs:
     - name: Test
       run: go test -v .
   
-     - name: Kind
+    - name: Kind
       run: cd kind && make
   
   
