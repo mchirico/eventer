@@ -9,6 +9,9 @@
 
 # eventer
 
+This project uses both a Mutating Admission Controller and
+client-go to control the K8s environment.
+
 ## Steps
 
 ```bash
