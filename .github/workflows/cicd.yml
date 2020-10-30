@@ -35,6 +35,31 @@ jobs:
     - name: Test
       run: go test -v .
   
+    - name: Kind
+      run: cd kind && make
   
+  
+     # Wait until ready
+    - name: kubectl
+      run: |
+        num=$(kubectl get pods --field-selector=status.phase!=Running -A|wc -l)
+        while [ $num -gt 3 ];
+        do
+          num=$(kubectl get pods --field-selector=status.phase!=Running -A|wc -l)
+          sleep 3
+          kubectl get pods --field-selector=status.phase!=Running -A
+        done
+  
+  
+  
+        
+    # *** This goes after the problem. ****
+    - uses: mchirico/vscode-action@v1
+      with:
+        ngrok_token: ${{ secrets.NGROK_TOKEN }}
+        vscode_port: 8779
+        wait_duration: 1hr
+
+ 
 
  
