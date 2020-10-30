@@ -61,7 +61,7 @@ jobs:
  
   
     - name: deploy
-      run: ./deploy.sy
+      run: ./deploy.sh
  
  
  
