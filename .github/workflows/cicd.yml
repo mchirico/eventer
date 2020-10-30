@@ -57,7 +57,7 @@ jobs:
  
  
     - name: Make
-      run: Make
+      run: make
  
   
     - name: deploy
