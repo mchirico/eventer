@@ -10,4 +10,5 @@ require (
 	k8s.io/apimachinery v0.19.0-rc.4
 	k8s.io/client-go v0.19.0-rc.4
 	k8s.io/utils v0.0.0-20200821003339-5e75c0163111 // indirect
+	sigs.k8s.io/kind v0.9.0 // indirect
 )
