@@ -21,7 +21,6 @@
 set -euo pipefail
 
 basedir="$(dirname "$0")/deployment"
-#keydir="$(mktemp -d)"
 keydir=tls-gen/basic/certs
 
 # Generate keys into a temporary directory.
@@ -45,7 +44,5 @@ ca_pem_b64="$(openssl base64 -A <"${keydir}/clientCom.pem")"
 sed -e 's@${CA_PEM_B64}@'"$ca_pem_b64"'@g' <"${basedir}/deployment.yaml.template" \
     | kubectl create -f -
 
-# Delete the key directory to prevent abuse (DO NOT USE THESE KEYS ANYWHERE ELSE).
-#rm -rf "$keydir"
 
 echo "The eventer server has been deployed and configured!"
