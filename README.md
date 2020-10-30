@@ -9,6 +9,26 @@
 
 # eventer
 
+## Steps
+
+```bash
+
+
+
+cd kind
+make
+
+# Stop. At this point, make sure everything is running.
+
+cd ./..
+./gencerts.sh
+./deploy.sh
+
+
+
+
+
+
 ```bash
 go get k8s.io/kubernetes || true
 
