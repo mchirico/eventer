@@ -51,7 +51,21 @@ jobs:
         done
   
   
+    - name: gencerts
+      run: ./gencerts.sh
+ 
+ 
+ 
+    - name: Make
+      run: Make
+ 
   
+    - name: deploy
+      run: ./deploy.sy
+ 
+ 
+ 
+ 
         
     # *** This goes after the problem. ****
     - uses: mchirico/vscode-action@v1
