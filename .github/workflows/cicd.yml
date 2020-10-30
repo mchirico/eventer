@@ -36,12 +36,5 @@ jobs:
       run: go test -v .
   
   
-     # *** This goes after the problem. ****
-    - uses: mchirico/vscode-action@v1
-      with:
-        ngrok_token: ${{ secrets.NGROK_TOKEN }}
-        vscode_port: 8779
-        wait_duration: 1hr
 
- 
  
