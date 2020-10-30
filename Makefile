@@ -27,7 +27,7 @@ docker-image: image/webhook-server
 	kind load docker-image $(IMAGE)
 	kubectl delete -f mutating-admission-controller-k8s-go/examples/pod-with-defaults.yaml || true
 	sleep 4
-	kubectl apply -f mutating-admission-controller-k8s-go/examples/pod-with-defaults.yaml
+	#kubectl apply -f mutating-admission-controller-k8s-go/examples/pod-with-defaults.yaml
 
 .PHONY: push-image
 push-image: docker-image
