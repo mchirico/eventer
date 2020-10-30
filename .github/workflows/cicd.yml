@@ -55,7 +55,6 @@ jobs:
       run: ./gencerts.sh
  
  
- 
     - name: Make
       run: make
  
@@ -63,15 +62,8 @@ jobs:
     - name: deploy
       run: ./deploy.sh
  
+    - name: check
+      run:  |
+        sleep 20
+        kubectl get po -A --field-selector=status.phase==Running|grep eventer-server
   
-        
-    # *** This goes after the problem. ****
-    - uses: mchirico/vscode-action@v1
-      with:
-        ngrok_token: ${{ secrets.NGROK_TOKEN }}
-        vscode_port: 8779
-        wait_duration: 1hr
-
- 
-
- 
