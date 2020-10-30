@@ -1,0 +1,65 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: eventer-server
+  namespace: eventer-demo
+  labels:
+    app: eventer-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: eventer-server
+  template:
+    metadata:
+      labels:
+        app: eventer-server
+    spec:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1234
+      containers:
+      - name: server
+        image: quay.io/mchirico/admission-controller-eventer-demo:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8443
+          name: eventer-api
+        volumeMounts:
+        - name: eventer-tls-certs
+          mountPath: /run/secrets/tls
+          readOnly: true
+      volumes:
+      - name: eventer-tls-certs
+        secret:
+          secretName: eventer-server-tls
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: eventer-server
+  namespace: eventer-demo
+spec:
+  selector:
+    app: eventer-server
+  ports:
+    - port: 443
+      targetPort: eventer-api
+---
+apiVersion: admissionregistration.k8s.io/v1beta1
+kind: MutatingWebhookConfiguration
+metadata:
+  name: demo-eventer
+webhooks:
+  - name: eventer-server.eventer-demo.svc
+    clientConfig:
+      service:
+        name: eventer-server
+        namespace: eventer-demo
+        path: "/mutate"
+      caBundle: ${CA_PEM_B64}
+    rules:
+      - operations: [ "CREATE" ]
+        apiGroups: [""]
+        apiVersions: ["v1"]
+        resources: ["pods"]

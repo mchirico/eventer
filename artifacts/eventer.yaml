@@ -1,0 +1,15 @@
+apiVersion: controller.mchirico.eventer/v1alpha1
+kind: Eventer
+metadata:
+  name: "example-eventer"
+  namespace: default
+spec:
+  containers:
+  - name: event0
+    image: quay.io/mchirico/go15
+    command:
+    - /bin/bash
+    args:
+    - -c
+    - echo "hello world"; sleep 10000
+

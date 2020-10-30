@@ -1,0 +1,26 @@
+apiVersion: apiextensions.k8s.io/v1beta1
+kind: CustomResourceDefinition
+metadata:
+  name: eventers.controller.mchirico.eventer
+  labels:
+    tag: eventer
+spec:
+  group: controller.mchirico.eventer
+  version: v1alpha1
+  names:
+    kind: Eventer
+    plural: eventers
+    singular: eventer
+  scope: Namespaced
+  validation:
+    openAPIV3Schema:
+      required: ["spec"]
+      properties:
+        spec:
+          required: ["containers"]
+          properties:
+            containers:
+              required: ["image"]
+              required: ["command"]
+              required: ["args"]
+
