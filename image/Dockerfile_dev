@@ -1,0 +1,7 @@
+FROM ubuntu
+
+# Can use debugging commands.
+# kubectl exec --stdin --tty eventer-server-69456fdf5-gfnwc -- /bin/bash
+
+COPY ./webhook-server /
+ENTRYPOINT ["/webhook-server"]
